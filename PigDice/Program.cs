@@ -14,40 +14,41 @@ namespace PigDice
 
             //create characters
             //generate random numbers for die
-            var turn = 0;
-            var game = 0;
+            var turnPoints = 0;
+            var totalGamePoints = 0;
 
-            while (game < 100)
-
+            while (totalGamePoints < 100)
             {
                 while (true)
-
                 {
+                   
                     var dice = rnd.Next(1, 7);
                     Console.WriteLine(dice);
 
-                    if (dice == 1)
+                    Console.WriteLine($"You rolled a {dice}.");
 
+                    if (dice == 1)
                     {
-                        turn = 0;
-                        Console.WriteLine($"You rolled {dice}, Lost Turn");
+                        turnPoints = 0;
                         break;
                     }
 
+
+                    turnPoints += dice;
+                    Console.WriteLine($"Total Score: {totalGamePoints}. This Turn Points: {turnPoints}");
+
+
+                    Console.WriteLine("Press 'r' to roll again, anything else to bank.");
+                    var userInput = Console.ReadLine();
+                    if (userInput != "r")
                     {
-                        game += dice;
-                        Console.WriteLine($"You rolled {dice}. Your Total Score is {game}");
-
-                        Console.WriteLine("press ENTER key to continue...");
-                        var userInput = Console.ReadLine();
-                        if (userInput == "r")
-                            continue;
-                    }
-
-
-                    {
+                        break;
                     }
                 }
+
+
+                totalGamePoints += turnPoints;
+                turnPoints = 0;
             }
 
             Console.WriteLine("You Win!");
@@ -88,8 +89,6 @@ namespace PigDice
         {
             Console.WriteLine("PigDICE!!!!");
             Console.WriteLine("Press any button to Continue!");
-            var present = DateTime.Now;
-            Console.WriteLine(present);
 
             Console.ReadLine();
             Console.Clear();
